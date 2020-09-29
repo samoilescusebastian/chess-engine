@@ -1,0 +1,22 @@
+Proiect sah - etapa 2
+	Sebastian Mihail-Samoilescu 325 CA
+	Cojocaru Adrian-Cosmin 325 CA
+	Neatu Remus 321 CA
+
+La aceasta etapa avem cate o clasa pentru fiecare piesa(knight,pawn,bishop,queen,king, rook), in care functiile getPossibleMoves() returneaza un vecttor
+de perechi de forma (source, dest), adica mutam piesa de la indicele source la indicele dest pe o tabla, numerotata de la 0 la 63. Acest lucru se
+realizeaza cu ajutorul operatiilor pe biti(mai intai vedem unde avem piese din fiecare categorie iar apoi returnam o tabla cu bitii de 1 setati
+in locurile in care aceste piese ar putea ajunge; aaceasta tabla este parcursa apoi pentru a lua pozitiile cu bitii 1, adica mutarile posibile).
+
+Pentru rege avem in plus functia isKingAttacked care ne indica daca regele este atacat de orice alta piesa inamica, parcurzand toate cele 8 diagonale
+posibile la care are regele acces si verificand prima piesa inamica de pe acestea(daca l-ar ataca). Functia checkCastle verifica daca la un anumit state
+al tablei(board) regele poate executa rocada(verifica sa nu fie in sah si turele aferente sa nu fi fost mutate, dar si sa nu existe piese intre
+rege si turele respective).
+
+Algoritmul Negamax este unul clasic, in care ne folosim de functia undoMove atunci cand ne intoarcem de pe o ramura si intram pe alta(alta mutare).
+Euristicile folosite sunt : prima aloca cate un scor pentru fiecare piesa, pion -1, cal-3, tura-5 etc), iar a doua da un scor pentru fiecare tip de piesa
+(cal, pion,rege,tura,regina) pentru fiecare pozitie a tablei. Acesta poate fi pozitiv sau negativ. De exemplu pentru pioni avem un scor mai mare spre centrul tablei
+intrucat vrem sa ne deschidem prin pionii de mijloc. La cai avem scoruri foarte mici daca este intr-un colt(are prea putine posibilitati de mutat/atacat) etc.
+
+In clasa Board, in afara faptului ca avem retinut mereu state-ul jocului, tinem si informatii precum kingsMoved sau kingPositions, care ne ajuta atunci cand vrem
+sa stim daca putem face rocada sau vrem sa stim pozitia regelui la verificarea de sah. 
